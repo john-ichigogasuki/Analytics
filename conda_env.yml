@@ -1,4 +1,4 @@
-name: newenv
+name: Analytics
 channels:
   - conda-forge
   - defaults
