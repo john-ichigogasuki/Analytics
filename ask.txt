@@ -1,0 +1,45 @@
+では，ここで格納されたmodel_nameに対して，Pandas等を用いてのちに分析を行うようのCSVを作成します．
+
+データ分析のためのCSVファイルを，これまでのデータを参照しながら作成します． まず，データの目標となる形式は
+
+participant, AIave, USERave, thoughtScore とします．ここで，左から参加者名，のちに抜き出すAI AverageのUniqueWords，Uer AverageのUniqueWords，あるファイルに格納されているThoughtfulnessのScore です．
+
+次に抜き出す先を指定します． participantは，model_nameに格納されたものをそのまま用いてください． 次に，AIaveは， /Users/john/Programs/University/Study/Analytics/Analyzed/AnalyzedData に格納されており，ファイル名はanalyzed_{model}_{name}.csvとなっています．
+
+そのファイル内の構造は， Speaker,Detail,WordsLen,UniqueWords,JLPTLevel,Sentiment-tabularisai,Sentiment-tabularisai-score,Sentiment-lxyuan,Sentiment-lxyuan-score,Sentiment-Christian,Sentiment-Christian-score AI,こんにちは！最近、体の調子はどうですか？何か運動やリラクゼーションの活動をしていますか？それとも、気になる健康のことがあれば、ぜひ教えてくださいね。,74,36.0,3.0,Very Negative,0.3984031677246094,positive,0.4017442464828491,positive,0.9989233613014221 User,最近は起きた時に寝ても寝ても眠い感じがする,21,13.0,2.0,Negative,0.3383002281188965,negative,0.4610213041305542,positive,0.8965456485748291 AI,それはちょっと大変そうですね。睡眠の質が落ちている可能性があるかもしれませんね。寝る前の環境や習慣に変化はありましたか？例えば、スマホを見る時間が長くなったり、寝る時間が不規則になったりしていないですか？それと、最近ストレスを感じることが多いとか、そういったことはありますか？,138,57.0,2.0,Very Negative,0.5618729591369629,negative,0.7305631041526794,neutral,0.9992620348930359 User,スマホを見てしまうことなどは前からあったけど，前よりも疲れている感じがするんだよね,41,25.0,2.0,Neutral,0.4698466956615448,negative,0.7736045718193054,neutral,0.969296395778656 AI,疲れが溜まっていると感じるときは、やっぱり体も心も重くなりますよね。スマホの光が睡眠の質を下げる影響もあるので、もしかしたらそれが疲れにつながっているのかもしれません。寝る1時間前にはスマホやパソコンを使うのをやめて、リラックスできる活動に切り替えると睡眠の質が改善するかもしれません。たとえば、読書や軽いストレッチ、あるいは好きな音楽を聴くといったリラクゼーションが効果的ですよ。それと、日中に適度な運動を取り入れると、体が自然と疲れて、夜にぐっすりと眠りやすくなることもあります。ちょっとした散歩でもいいので、試してみるといいかもしれませんね。,274,90.0,2.0,Neutral,0.339138388633728,positive,0.5171481370925903,neutral,0.8002665042877197 User,散歩するのに家の周りが面白くないんだけど，散歩が面白くなるアイデアが欲しいんだよな,41,18.0,2.0,Neutral,0.3976798057556152,positive,0.4565697014331817,neutral,0.965423047542572 AI,散歩をもっと楽しくするアイデア、いくつか提案しますね！ポッドキャストやオーディオブックを聴く：お気に入りのポッドキャストや面白いオーディオブックを聴きながら歩くと、時間があっという間に過ぎていきます。興味のあるトピックや物語に集中できるので、散歩が楽しくなりますよ。写真を撮る：散歩中にスマホやカメラで面白いものや美しい景色を探して写真を撮るのもいいですね。普段は見過ごしてしまうような小さなディテールや自然の美しさに気づくかもしれません。友達と一緒に行く：友達と一緒に散歩をすると、話しながら歩くことで楽しみが増します。また、お互いにモチベーションを高めあうことができるので、より活動的になれるでしょう。散歩ルートを変えてみる：いつもと違う道を選んでみるのも新鮮な気分になります。少し遠くの公園まで足を伸ばしてみるとか、未探索のエリアにチャレンジしてみるのも面白いですよ。これらの中で何か試してみたいものはありますか？それとも他に興味があるアクティビティがあれば、それに合わせて提案もできますよ！,449,126.0,3.0,Positive,0.6454950571060181,positive,0.7664373517036438,positive,0.9983465671539307 AI Average,Mean Unique Words,17,77.25,3.0,Neutral,0.4241121411323547,positive,0.5115834474563599,positive,0.9940897226333618 User Average,Mean Unique Words,17,18.666666666666668,3.0,Neutral,0.4241121411323547,positive,0.5115834474563599,positive,0.9940897226333618
+となっており，このAI AverageのUniqueWordsをAIave，User AverageのUniqueWordsをUSERaveに追加予定です．
+ここで重要な点は，AIave,USERaveを取得する際に，
+/Users/john/Programs/University/Study/Analytics/Analyzed/AnalyzedData
+内の要素に対して，analyzerd_{model}_{name}.csvの要素をそれぞれmodel_nameに格納されている{model}_{name}の状態から正しく取得することです．
+また，それを同じparticipantsに一致しなければなりません．
+
+---
+
+このプログラムに対して指定があります．
+まず，participantについては，modelについても知る必要があるのでnameだけではなく，
+{model}_{name}となるようにしてください．
+次に，Thoughtfulnessについては後で指摘を行うので，現時点で補完する必要はありません．
+また，csvファイルとしては保存せず，いったんはPandasを用いて，そのdataframeを出力するのみで結構です．
+それに問題がなければ，次に私があなたに対して，保管場所を指定するパスを渡すので，そこに対してpd.to_csv等を用いて保存してください
+
+---
+
+次に，新にthoughtfulnessの欄を作成し，participantのデータから，紐づく値を新たに埋める作業を行います．
+thoughtfulnessは，
+/Users/john/Programs/University/Study/Analytics/Evaluation/thoughtfulnessData_alpha.csv
+/Users/john/Programs/University/Study/Analytics/Evaluation/thoughtfulnessData_beta.csv
+の二つに格納されており，データの形式は以下のようになっています．
+name,thoughtfulness,AIAverageUniqueWords,UserAverageUniqueWords,ToughtfulnessEvaluateResult
+Sakai,3.0,61.0,24.6,low
+Futamura,3.0,91.7,19.0,low
+Pang,3.0,89.0,13.5,low
+Koga,5.0,58.6,19.1,high
+Oyama,6.0,38.3,7.8,high
+Shiojiri,5.0,56.1,22.7,high
+Abe,4.0,77.3,18.7,neutral
+Hiraoka,3.0,53.1,15.7,low
+Mori,5.0,40.8,17.9,high
+Suto,2.0,45.0,17.7,low
+ここで，例えばparticipantがalpha_Sakaiだった場合，
+thoughtfulnessData_alpha.csvの，name=Sakaiの，thoughtfulnessに値が格納されています．
+これを取得して，partivcipantと一致する欄に追加をしたいと考えています
